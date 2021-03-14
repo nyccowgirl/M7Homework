@@ -1,4 +1,5 @@
-import java.util.regex.Matcher;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Practice {
 
@@ -33,15 +34,109 @@ public class Practice {
 
         // Question 6:
 
-        String word = "beach";
+        String word1 = "beach";
+        String word2 = "applesauce ALLIGATOR";
 
-        printUpperVowelsReverseOrder(word);
+        printUpperVowelsReverseOrder(word1);
+        printUpperVowelsReverseOrder(word2);
 
         // Question 7:
+
         int[] multiples = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
         printValuesAtMultipleIndices(multiples, 3);
 
+        // Question 8:
+
+        printDataEveryOther(str);
+
+        // Question 9:
+
+        FileItem aFile = new FileItem("AAA", 11);
+        FileItem bFile = new FileItem("BBB", 12);
+        FileItem cFile = new FileItem("CCC", 13);
+        FileItem dFile = new FileItem("DDD", 14);
+        FileItem eFile = new FileItem("EEE", 15);
+        FileItem fFile = new FileItem("FFF", 16);
+        FileItem gFile = new FileItem("GGG", 17);
+        FileItem hFile = new FileItem("HHH", 18);
+        FileItem iFile = new FileItem("III", 19);
+        FileItem jFile = new FileItem("JJJ", 20);
+        FileItem kFile = new FileItem("KKK", 21);
+        FileItem lFile = new FileItem("LLL", 22);
+        FileItem mFile = new FileItem("MMM", 23);
+        FileItem nFile = new FileItem("NNN", 24);
+        FileItem oFile = new FileItem("OOO", 25);
+        FileItem pFile = new FileItem("PPP", 26);
+
+        Folder folder1 = new Folder("Folder1",100);
+        Folder folder2 = new Folder("Folder2",150);
+        Folder folder3 = new Folder("Folder3",175);
+        Folder folder4 = new Folder("Folder4",200);
+        Folder folder5 = new Folder("Folder5",50);
+        Folder folder6 = new Folder("Folder6",300);
+        Folder folder7 = new Folder("Folder7",200);
+        Folder folder8 = new Folder("Folder8",100);
+        Folder folder9 = new Folder("Folder9",75);
+
+        folder1.addFolder(folder2);
+        folder1.addFolder(folder3);
+        folder1.addFolder(folder4);
+        folder2.addFolder(folder5);
+        folder2.addFolder(folder6);
+        folder3.addFolder(folder7);
+        folder3.addFolder(folder8);
+        folder7.addFolder(folder9);
+
+        folder1.addFile(aFile);
+        folder1.addFile(bFile);
+        folder2.addFile(cFile);
+        folder2.addFile(dFile);
+        folder3.addFile(eFile);
+        folder4.addFile(fFile);
+        folder5.addFile(gFile);
+        folder5.addFile(hFile);
+        folder6.addFile(iFile);
+        folder6.addFile(jFile);
+        folder7.addFile(kFile);
+        folder7.addFile(lFile);
+        folder7.addFile(mFile);
+        folder9.addFile(nFile);
+        folder9.addFile(oFile);
+        folder9.addFile(pFile);
+
+        printFolderContents(folder1);
+        System.out.println(getFolderSize(folder1));
+
+        Folder[] folders = {folder1,folder2,folder3,folder4,folder5,folder6,folder7,folder8,folder9};
+        for(Folder folder : folders) {
+            System.out.println(folder.getName() + " maxSize " + folder.getMaxSize() + " currentSize " + folder.getSizeOfFiles());
+        }
+
+        FileItem newFile = new FileItem("newbie",77);
+        System.out.println("Result: " + folder1.isSpaceInFolderOrSubfolders(newFile));
+        newFile = new FileItem("newbie",78);
+        System.out.println("Result: " + folder1.isSpaceInFolderOrSubfolders(newFile));
+        newFile = new FileItem("newbie",200);
+        System.out.println("Result: " + folder1.isSpaceInFolderOrSubfolders(newFile));
+        newFile = new FileItem("newbie",400);
+        System.out.println("Result: " + folder1.isSpaceInFolderOrSubfolders(newFile));
+
+        // Question 10
+
+        System.out.println(countStepWays(1));
+        System.out.println(countStepWays(2));
+        System.out.println(countStepWays(3));
+        System.out.println(countStepWays(5));
+        System.out.println(countStepWays(10));
+
+        // Question 11
+
+        String text = "ABCD";
+        List<String> permutationList = generatePermutationList(text);
+//		Collections.sort(permutationList); // for display purposes only
+        System.out.println(permutationList);
+        System.out.println("Number of Permutations = " + permutationList.size());
     }
 
 
@@ -130,14 +225,101 @@ public class Practice {
 
     // Helper method
     public static void printValuesAtMultipleIndices(int[] nums, int index, int indexMultiple) {
-        if (index == 0) {
-            System.out.print(nums[index] + " ");
-        } else if (index % indexMultiple == 0) {
+        if ((index == 0) || (index % indexMultiple == 0)) {
             System.out.print(nums[index] + " ");
         }
 
         if (index < nums.length - 1) {
             printValuesAtMultipleIndices(nums, index + 1, indexMultiple);
+        }
+    }
+
+
+    public static void printDataEveryOther(Node<Integer> firstNode) {
+        if (firstNode != null) {
+            System.out.println(firstNode.getData());
+            printDataEveryOther(firstNode.getNextNode().getNextNode());
+        }
+    }
+
+
+    // Helper methods to get total size of folders and subfolders
+    public static int getFolderSize(Folder topFolder) {
+        int size = topFolder.getSizeOfFiles(); // small part we can solve now
+        List<Folder> subfolderList = topFolder.getFolders();
+        for(Folder subfolder : subfolderList) {
+            size = size + getFolderSize(subfolder); // recursive call
+            // combining the small part of the solution with the recursive "rest of the solution"
+            // AND putting it in a local variable
+        }
+        // implicit base case- when a folder has no more subfolders the recursion will stop
+        return size;
+    }
+
+    // Helper methods to display folders
+    public static void printFolderContents(Folder topFolder) {
+        printFolderContentsHelper(topFolder, 0);
+    }
+
+    private static void printFolderContentsHelper(Folder topFolder, int indentationIndex) {
+        for(int i = 0; i < indentationIndex; i++) {
+            System.out.print("   ");
+        }
+
+        System.out.print(topFolder);
+        System.out.println("  Files: " + topFolder.getFiles()); // small part solving now- print the files in the current folder
+        List<Folder> subfolderList = topFolder.getFolders();
+        for(Folder subfolder : subfolderList) {
+            printFolderContentsHelper(subfolder, indentationIndex+1); // recursive call
+        }
+        // implicit base case- happens when a folder has no more subfolders- the recursion will end
+    }
+
+
+    public static int countStepWays(int steps) {
+        if (steps <= 1) {
+            return 1;
+        } else if (steps == 2) {
+            return 2;
+        } else if (steps == 3) {
+            return 4;       // 3-hop; 1-hop + 2-hop; 2-hop + 1-hop; 1-hop + 1-hop + 1-hop
+        } else {
+            // for climbing n steps, you can either start with a 1-hop, a 2-hop, or a 3-hop,
+            // so there are three possible cases (which corresponds to our three base cases)
+            //
+            // if you start with a 1-hop, there are n-1 steps left to go and you know that
+            // the answer to how many steps that takes is countStepWays(n-1)
+            //
+            // similarly, if you start with a 2-hop, there are n-2 steps left to go and you
+            // know that the answer to how many steps that takes is countStepWays(n-2)
+            //
+            // same for if you start with a 3-hop
+            //
+            // so these are the three possibilities- add them up and that makes all choices!
+            return countStepWays(steps - 1) + countStepWays(steps - 2) + countStepWays(steps - 3);
+        }
+    }
+
+
+    public static List<String> generatePermutationList(String text) {
+        List<String> permutationList = new ArrayList<String>();
+        generatePermutationList("", text, permutationList);
+        return permutationList;
+    }
+
+    // Helper method
+    private static void generatePermutationList(String startingPermutation, String restOfString, List<String> list) {
+        if(restOfString.length()==1) { // base case
+            list.add(startingPermutation + restOfString);
+        } else { // recursive case
+            // rare RARE instance when we have recursion inside of a loop
+            for(int i = 0; i < restOfString.length(); i++) {
+                String startingCharacter = restOfString.charAt(i) + "";
+                String newStartingPermutation = startingPermutation + startingCharacter;
+                String newRestOfString = restOfString.substring(0, i) + restOfString.substring(i + 1);
+                generatePermutationList(newStartingPermutation, newRestOfString, list);
+            }
+
         }
     }
 }
