@@ -129,31 +129,21 @@ public class HomeworkM7Driver {
 	}
 
 	public static int countPositives(BagInterface<Integer> bag) {
-		return countPositives(bag, 0, 0);
-//		return count; // placeholder: delete and replace when you write your own method
-	}
-
-	// Helper method
-	private static int countPositives(BagInterface<Integer> bag, int start, int count) {
-//		int count = 0;
-		if (start < bag.getCurrentSize()) {
-			return countPositives(bag, start + 1, count);
-		} else {
-			if (bag.getCurrentSize() == 0) {
-				return 0;
-			}
+		if (!bag.isEmpty()) {					// If bag is not empty, remove one item at a time for conditional
 			int number = bag.remove();
+			int count = 0;
 
-//			bag.add(number);
 			if (number > 0) {
-//				return 1 + countPositives(bag, start + 1, count);
-				count++;
+				count = 1;
 			}
-			bag.add(number);		//unreachable
+
+			count = count + countPositives(bag);
+
+			bag.add(number);        			// Add item back into bag after recursion that removes all items
+			return count;
 		}
 
-//		bag.add(number);			// unreachable
-		return count; // placeholder: delete and replace when you write your own method
+		return 0;
 	}
 
 	
