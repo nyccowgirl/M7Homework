@@ -1,5 +1,6 @@
 package Practice;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -301,7 +302,7 @@ public class Practice {
     }
 
     // Helper method
-    public static int findMin(int[] nums, int start, int end) {
+    private static int findMin(int[] nums, int start, int end) {
         if (start == end) {
             return nums[start];
         } else if ((start + 1) == end) {
@@ -351,7 +352,7 @@ public class Practice {
     }
 
     // Helper method
-    public static void printUpperVowelsReverseOrder(String text, int index) {
+    private static void printUpperVowelsReverseOrder(String text, int index) {
         if (index < text.length() - 1) {
             printUpperVowelsReverseOrder(text, index + 1);
         }
@@ -371,7 +372,7 @@ public class Practice {
     }
 
     // Helper method
-    public static void printValuesAtMultipleIndices(int[] nums, int index, int indexMultiple) {
+    private static void printValuesAtMultipleIndices(int[] nums, int index, int indexMultiple) {
         if ((index == 0) || (index % indexMultiple == 0)) {
             System.out.print(nums[index] + " ");
         }

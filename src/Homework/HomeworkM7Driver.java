@@ -52,48 +52,53 @@ public class HomeworkM7Driver {
 		testQNotFollowedByU("QUOTE",  false, "q-followed-by-u in all-caps");
 
 
-//		System.out.println("\n********************************************TESTING GET FREQUENCY OF********************************************");
-//		// parameter 1: the contents of the bag
-//		// parameter 2: the target value
-//		// parameter 3: the expected return value- how often the target appears in the bag
-//		// parameter 4: a description of the test
-//		testGetFrequencyOf(new Integer[] {}, 12, 0, 	"empty bag");
-//		testGetFrequencyOf(new Integer[] {13}, 13, 1, 	"singleton bag that contains the target");
-//		testGetFrequencyOf(new Integer[] {13}, 5, 0, 	"singleton bag that does not contain the target");
-//		testGetFrequencyOf(new Integer[] {15, 2, 5, 4, 7, 5}, 15, 1,  "target is in the bag at the beginning");
-//		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 25}, 25, 1,  "target is in the bag at the end");
-//		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 4, 1, 	  "target is in the middle");
-//		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 5, 3, 	  "target is in the bag multiple times");
-//		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 8, 0, 	  "target not in the bag, even length");
-//		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5, 2}, 8, 0, "target not in the bag, odd length");
-//		testGetFrequencyOf(new String[] {"a", "b", "c", "d", "e", "a"}, new String("a"), 2, "test with Strings");
-//
-//
-//		System.out.println("\n********************************************TESTING EXTRA CREDIT COUNT POSITIVES********************************************");
-//		// parameter 1: the contents of the bag
-//		// parameter 2: the expected result- the number of positives
-//		// parameter 3: a description of the test
-//		testCountPositives(new int[] {2, -1, 3, 5, -2, 4, 1}, 	5, "odd number of elements");
-//		testCountPositives(new int[] {1, -4, -2, 5, 3, -1, 2}, 	4, "even number of elements");
-//		testCountPositives(new int[] {-3, -4, -2, -5, -8}, 		0, "no positives");
-//		testCountPositives(new int[] {6, 4, 3, 2, 1, 7, 9}, 	7, "all positives");
-//		testCountPositives(new int[] {}, 						0, "empty bag");
-//		testCountPositives(new int[] {6}, 						1, "singleton bag with positive");
-//		testCountPositives(new int[] {-6},		 				0, "singleton bag without positive");
+		System.out.println("\n********************************************TESTING GET FREQUENCY OF********************************************");
+		// parameter 1: the contents of the bag
+		// parameter 2: the target value
+		// parameter 3: the expected return value- how often the target appears in the bag
+		// parameter 4: a description of the test
+		testGetFrequencyOf(new Integer[] {}, 12, 0, 	"empty bag");
+		testGetFrequencyOf(new Integer[] {13}, 13, 1, 	"singleton bag that contains the target");
+		testGetFrequencyOf(new Integer[] {13}, 5, 0, 	"singleton bag that does not contain the target");
+		testGetFrequencyOf(new Integer[] {15, 2, 5, 4, 7, 5}, 15, 1,  "target is in the bag at the beginning");
+		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 25}, 25, 1,  "target is in the bag at the end");
+		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 4, 1, 	  "target is in the middle");
+		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 5, 3, 	  "target is in the bag multiple times");
+		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5}, 8, 0, 	  "target not in the bag, even length");
+		testGetFrequencyOf(new Integer[] {5, 2, 5, 4, 7, 5, 2}, 8, 0, "target not in the bag, odd length");
+		testGetFrequencyOf(new String[] {"a", "b", "c", "d", "e", "a"}, new String("a"), 2, "test with Strings");
+
+
+		System.out.println("\n********************************************TESTING EXTRA CREDIT COUNT POSITIVES********************************************");
+		// parameter 1: the contents of the bag
+		// parameter 2: the expected result- the number of positives
+		// parameter 3: a description of the test
+		testCountPositives(new int[] {2, -1, 3, 5, -2, 4, 1}, 	5, "odd number of elements");
+		testCountPositives(new int[] {1, -4, -2, 5, 3, -1, 2}, 	4, "even number of elements");
+		testCountPositives(new int[] {-3, -4, -2, -5, -8}, 		0, "no positives");
+		testCountPositives(new int[] {6, 4, 3, 2, 1, 7, 9}, 	7, "all positives");
+		testCountPositives(new int[] {}, 						0, "empty bag");
+		testCountPositives(new int[] {6}, 						1, "singleton bag with positive");
+		testCountPositives(new int[] {-6},		 				0, "singleton bag without positive");
 	
 	}
 
 	public static boolean qNotFollowedByU(String word) {
+		// Option 1
+		return (word.length() == 0 ? false : qNotFollowedByU(word, 0));
+
+		// Option 2
+		/*
 		if (word.length() == 0) {			// Base case if word is empty
 			return false;
 		} else {
 			return qNotFollowedByU(word, 0);
 		}
+		 */
 	}
 
 	// Helper method
-
-	public static boolean qNotFollowedByU(String word, int index) {
+	private static boolean qNotFollowedByU(String word, int index) {
 		if (index >= word.length()) {		// Base case if index is greater than or equal to size of word
 			return false;
 		} else {
@@ -110,23 +115,45 @@ public class HomeworkM7Driver {
 	}
 
 	// Helper methods
-
-	public static void arrayReverse(int[] array, int start, int end) {
+	private static void arrayReverse(int[] array, int start, int end) {
 		if (start < end) {
 			swap(array, start, end);
 			arrayReverse(array, start + 1, end - 1);
 		}
 	}
 
-	public static void swap(int[] array, int i, int j) {
+	private static void swap(int[] array, int i, int j) {
 		int temp = array[i];
 		array[i] = array[j];
 		array[j] = temp;
 	}
 
 	public static int countPositives(BagInterface<Integer> bag) {
-		// YOUR EXTRA CREDIT CODE HERE
-		return 0; // placeholder: delete and replace when you write your own method
+		return countPositives(bag, 0, 0);
+//		return count; // placeholder: delete and replace when you write your own method
+	}
+
+	// Helper method
+	private static int countPositives(BagInterface<Integer> bag, int start, int count) {
+//		int count = 0;
+		if (start < bag.getCurrentSize()) {
+			return countPositives(bag, start + 1, count);
+		} else {
+			if (bag.getCurrentSize() == 0) {
+				return 0;
+			}
+			int number = bag.remove();
+
+//			bag.add(number);
+			if (number > 0) {
+//				return 1 + countPositives(bag, start + 1, count);
+				count++;
+			}
+			bag.add(number);		//unreachable
+		}
+
+//		bag.add(number);			// unreachable
+		return count; // placeholder: delete and replace when you write your own method
 	}
 
 	
