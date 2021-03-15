@@ -137,6 +137,151 @@ public class Practice {
 //		Collections.sort(permutationList); // for display purposes only
         System.out.println(permutationList);
         System.out.println("Number of Permutations = " + permutationList.size());
+
+        // Question 12
+
+        /*
+        Trace the execution of the following method (written in pseudocode) by listing what is printed when the
+        method is invoked with the specified parameters. (Note that pseudocode is provided because the idea is that
+        you will trace this by hand!)
+
+        array = [4, 9, 0, 3, 1, 2, 7, 6]
+
+        a=2
+
+        b=7
+
+        public void recMethodA(int[] array, int a, int b) {
+           if(a <= b) {
+              print the array
+              recMethodA(array, a+1, b)
+              if the value in the array at a is even
+                  make it negative
+              print the array
+           }
+        }
+
+        a = 2; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 3; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 4; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 5; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 6; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 7; b = 7        4, 9, 0, 3, 1, 2, 7, 6
+        a = 7; b = 7        4, 9, 0, 3, 1, 2, 7, -6
+        a = 6; b = 7        4, 9, 0, 3, 1, 2, 7, -6
+        a = 5; b = 7        4, 9, 0, 3, 1, -2, 7, -6
+        a = 4; b = 7        4, 9, 0, 3, 1, -2, 7, -6
+        a = 3; b = 7        4, 9, 0, 3, 1, -2, 7, -6
+        a = 2; b = 7        4, 9, 0, 3, 1, -2, 7, -6
+         */
+
+        // Question 13:
+
+        /*
+        What is printed when the method is invoked with the specified parameters?
+
+        Explain in your own words what the method does. Do not describe the code- instead, write a one-line
+        explanation as if someone asked you, "hey, what does this method do?" To answer, describe the result
+        that the method generates.
+
+        array = [4, 9, 0, 3, 6, 2, 12, 6]
+
+        a=3
+
+        public int recMethodB(int[] array, int a) {
+           return recMethodHelper(array, a, 0);
+        }
+
+        public int recMethodHelper(int[] array, int a, int b) {
+           if(b < array.length) {
+              if(array[b] % a ==0) {
+                 return 1 + recMethodHelper(array, a, b+1);
+              } else {
+                 return 0 + recMethodHelper(array, a, b+1);
+              }
+           }
+           return 0;
+        }
+
+        6 => number of values in array that are divisible by a
+         */
+
+        // Question 14
+
+        /*
+        a = 2, b = 5
+
+        then a = 3, b = 7
+
+        then a = 5, b = 4
+
+        public int recMethodC(int a, int b) {
+           if(b > a) {
+              return b + recMethodC(a, b-1);
+           } else {
+              return a;
+           }
+        }
+
+        14
+        25
+        5 => sums all the numbers from a to b if in increasing order
+         */
+
+        // Question 15
+
+        /*
+        What is the result of invoking the method below with x=3, y=6?
+
+        public int recMethod3(int x, int y) {
+           if(x>0) {
+              return y + recMethod3(x-1, y);
+           } else {
+              return 1;
+           }
+        }
+
+        19 => calculates (y * x) + 1
+         */
+
+        // Question 16
+
+        /*
+        6 -> 2 -> 3 -> 1 -> 7 -> 12
+
+        public void recMethod(Node node) {
+           print the chain of nodes
+           if(node!=null) {
+              recMethod(node.next);
+              if the value of node is even
+                  make it negative
+              print the chain of nodes
+           }
+        }
+
+        6 -> 2 -> 3 -> 1 -> 7 -> 12
+        2 -> 3 -> 1 -> 7 -> 12
+        3 -> 1 -> 7 -> 12
+        1 -> 7 -> 12
+        7 -> 12
+        12
+        null
+        -12
+        7 -> -12
+        1 -> 7 -> -12
+        3 -> 1 -> 7 -> -12
+        -2 -> 3 -> 1 -> 7 -> -12
+        -6 -> -2 -> 3 -> 1 -> 7 -> -12
+         */
+
+        // Question 17
+
+        /*
+        Tail recursion is similar to the method where the vowels are printed backwards to its index in an array,
+        where the recursive case is the last thing in the method. It seems as if recursion is not often the most
+        optimal in terms of efficiencies, although tail recursion seems to avoid stack overflow. In Java, this seems
+        to be bypassed by concepts such as annotation processing.
+         */
     }
 
 
