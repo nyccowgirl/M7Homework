@@ -289,7 +289,7 @@ public class Practice {
 
 
     public static int calculateExponent(int base, int power) {
-        if (power == 0) {
+        if (power <= 0) { // Base case for 0 and negative numbers
             return 1;
         } else {
             return base * calculateExponent(base, power - 1);
